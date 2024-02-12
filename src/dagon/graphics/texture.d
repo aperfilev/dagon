@@ -26,7 +26,6 @@ DEALINGS IN THE SOFTWARE.
 */
 module dagon.graphics.texture;
 
-import std.conv;
 import std.stdio;
 import std.math;
 import std.algorithm;
@@ -526,7 +525,7 @@ class Texture: Owner
                 if (generateMipmaps)
                 {
                     glGenerateMipmap(GL_TEXTURE_1D);
-                    mipLevels = 1 + cast(uint)floor(log2(w.to!float));
+                    mipLevels = 1 + cast(uint)floor(log2(cast(float)w));
                 }
                 else
                     mipLevels = 1;
@@ -581,7 +580,7 @@ class Texture: Owner
                 if (generateMipmaps)
                 {
                     glGenerateMipmap(GL_TEXTURE_2D);
-                    mipLevels = 1 + cast(uint)floor(log2(max(w, h).to!float));
+                    mipLevels = 1 + cast(uint)floor(log2(cast(float)max(w, h)));
                 }
                 else
                     mipLevels = 1;
@@ -651,7 +650,7 @@ class Texture: Owner
                 if (generateMipmaps)
                 {
                     glGenerateMipmap(GL_TEXTURE_3D);
-                    mipLevels = 1 + cast(uint)floor(log2(max3(w, h, d).to!float));
+                    mipLevels = 1 + cast(uint)floor(log2(cast(float)max3(w, h, d)));
                 }
                 else
                     mipLevels = 1;
@@ -723,7 +722,7 @@ class Texture: Owner
             if (generateMipmaps)
             {
                 glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-                mipLevels = 1 + cast(uint)floor(log2(resolution.to!float));
+                mipLevels = 1 + cast(uint)floor(log2(cast(float)resolution));
             }
             else
                 mipLevels = 1;
@@ -742,7 +741,7 @@ class Texture: Owner
         {
             bind();
             glGenerateMipmap(format.target);
-            mipLevels = 1 + cast(uint)floor(log2(max(size.width, size.height).to!float));
+            mipLevels = 1 + cast(uint)floor(log2(cast(float)max(size.width, size.height)));
             unbind();
             useMipmapFiltering(true);
         }
